@@ -59,5 +59,6 @@ p1.setLugar()
 
 print(p1.hora_llegada)
 print(p1.lugar)
+print(p1.id)
 
 
