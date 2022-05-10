@@ -81,11 +81,11 @@ def setName():
     name = Nombreinput.get()
     print(name)
 
-Clear = tk.Button(text="Nuevo usuario",command=clear)
-Clear.pack()
-
 SaveName = tk.Button(text="Guardar usuario",command=setName)
 SaveName.pack()
+
+Clear = tk.Button(text="Nuevo usuario",command=clear)
+Clear.pack()
 
 win.mainloop()
 
