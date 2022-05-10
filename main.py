@@ -22,10 +22,10 @@ class Estacionamiento():
 
         while running:
             try:
-                self.hora_llegada = input("Introduzca la hora de llegada: ")
+                self.hora_llegada = int(input("Introduzca la hora de llegada: "))
                 running = False
             except ValueError:
-                print("Introduzca un valor válido")
+                print("Introduzca una hora válida")
         
     def setLugar(self):
         running = True
