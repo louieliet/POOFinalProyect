@@ -1,7 +1,7 @@
-from  tkinter import *
-from tkinter import ttk
-import sys
+from binascii import b2a_base64
 import tkinter
+import sys
+from traceback import TracebackException
 
 
 class ExcepcionHora(Exception):
@@ -57,12 +57,13 @@ class Profesor(Estacionamiento):
 
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
-
 win = tkinter.Tk()
 win.geometry("500x500")
 
-text = tkinter.Label(win,text="Hola")
-text.pack()
+b1 = tkinter.Button(win, text= "Click")
+b2 = tkinter.Button(win, text= "Click2")
+b3 = tkinter.Button(win, text= "Click3")
+
+b1.grid(row = 0, column = 0)
+
 win.mainloop()
-
-
