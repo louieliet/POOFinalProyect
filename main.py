@@ -9,17 +9,16 @@ class ExcepcionHora(Exception):
 
 
 class Estacionamiento():
-    def __init__(self, nombre, _id, profesion):
+    def __init__(self, nombre, _id, ocupacion):
         self.nombre = nombre
         self.id = _id
-        self.profesion = profesion
+        self.ocupacion = ocupacion
         self.__placas = ""
         self.hora_llegada = 0
         self.lugar = 0
     
     def setHoradeLlegada(self):
         running = True
-
         while running:
             try:
                 self.hora_llegada = int(input("Introduzca la hora de llegada: "))
@@ -37,20 +36,23 @@ class Estacionamiento():
                 print("Introduzca un valor válido")
           
     def setPlacas(self):
-        try:
-            self.__placas = str(input("Placas del coche: "))
-        except ValueError:
-            print("Introduzca placas válidas")
-        
+        running = True
+        while running:
+            try:
+                self.__placas = str(input("Placas del coche: "))
+                running = False
+            except ValueError:
+                print("Introduzca placas válidas")
+    
 class Estudiante(Estacionamiento):
-    def __init__(self, nombre, id, profesion, carrera, semestre):
-        super().__init__(nombre, id, profesion)
+    def __init__(self, nombre, id, ocupacion, carrera, semestre):
+        super().__init__(nombre, id, ocupacion)
         self.carrera = carrera
         self.semestre = semestre
     
 class Profesor(Estacionamiento):
-    def __init__(self, nombre, id, profesion):
-        super().__init__(nombre, id, profesion)
+    def __init__(self, nombre, id, ocupacion):
+        super().__init__(nombre, id, ocupacion)
 
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
