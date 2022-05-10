@@ -1,3 +1,4 @@
+from pydoc import TextRepr
 import tkinter as tk
 from tkinter import *
 
@@ -5,6 +6,7 @@ from tkinter import *
 class ExcepcionHora(Exception):
     def __init__(self, hora):
         self.hora = hora
+
 class Estacionamiento():
     def __init__(self, nombre, _id, ocupacion):
         self.nombre = nombre
@@ -56,18 +58,59 @@ class Profesor(Estacionamiento):
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
 
-#Tkinter stuffs to start
+#Init window
 win = tk.Tk()
-win.geometry("500x500")
-win.title("Proyecto Programación Orientada a Objetos")
-
 
 #Some other stuff
 global entername
 entername = StringVar()
 
-
 #Creating the main menu
+
+def mainmenu():
+
+    for widget in win.winfo_children():
+        widget.destroy()
+
+    win.geometry("500x500")
+    win.title("Proyecto Programación Orientada a Objetos")
+
+    register = tk.Button(text="Registrar Usuarios", command=RegisterUsers)
+    register.pack()
+    
+    consult = tk.Button(text="Consultar un usuario", command=ConsultUsers)
+    consult.pack()
+
+    win.mainloop()
+
+
+def RegisterUsers():
+    
+    for widget in win.winfo_children():
+        widget.destroy()
+
+    win.title("Registrar Usuarios")
+    
+    text = tk.Label(text="Hola")
+    text.pack()
+
+    win.mainloop()
+
+def ConsultUsers():
+    pass
+
+
+
+
+
+
+if __name__ == "__main__":
+    mainmenu()
+
+
+
+"""""""""""""""
+#Creating the register menu
 Nombre = tk.Label(text="Introduzca su nombre: ")
 Nombre.pack(pady=2,padx=2)
 Nombreinput = tk.Entry(bd=4, textvariable=entername)
@@ -87,5 +130,24 @@ SaveName.pack()
 Clear = tk.Button(text="Nuevo usuario",command=clear)
 Clear.pack()
 
-win.mainloop()
+
+#Id
+ID = tk.Label(text="Introduzca su id: ")
+ID.pack(pady=2,padx=2)
+IDinput = tk.Entry(bd=4, textvariable=entername)
+IDinput.pack(pady=5,padx=5)
+
+
+def setID():
+    ID = IDinput.get()
+    print(ID)
+
+SaveID = tk.Button(text="Guardar ID",command=setName)
+SaveID.pack()
+
+Clear = tk.Button(text="Borrar",command=clear)
+Clear.pack()
+
+"""""""""
+
 
