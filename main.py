@@ -1,14 +1,10 @@
-from binascii import b2a_base64
-import tkinter
-import sys
-from traceback import TracebackException
+import tkinter as tk
+from tkinter import *
 
-
+#Creating all start stuff
 class ExcepcionHora(Exception):
     def __init__(self, hora):
         self.hora = hora
-
-
 class Estacionamiento():
     def __init__(self, nombre, _id, ocupacion):
         self.nombre = nombre
@@ -55,10 +51,41 @@ class Profesor(Estacionamiento):
     def __init__(self, nombre, id, ocupacion):
         super().__init__(nombre, id, ocupacion)
 
+
+#Estudiante object
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
-win = tkinter.Tk()
-win.geometry("500x500")
 
+#Tkinter stuffs to start
+win = tk.Tk()
+win.geometry("500x500")
+win.title("Proyecto Programación Orientada a Objetos")
+
+
+#Some other stuff
+global entername
+entername = StringVar()
+
+
+#Creating the main menu
+Nombre = tk.Label(text="Introduzca su nombre: ")
+Nombre.pack(pady=2,padx=2)
+Nombreinput = tk.Entry(bd=4, textvariable=entername)
+Nombreinput.pack(pady=5,padx=5)
+
+#clear Function
+def clear():
+    entername.set("")
+
+def setName():
+    name = Nombreinput.get()
+    print(name)
+
+Clear = tk.Button(text="Nuevo usuario",command=clear)
+Clear.pack()
+
+SaveName = tk.Button(text="Guardar usuario",command=setName)
+SaveName.pack()
 
 win.mainloop()
+
