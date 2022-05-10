@@ -1,6 +1,7 @@
-from pydoc import TextRepr
 import tkinter as tk
 from tkinter import *
+
+
 
 #Creating all start stuff
 class ExcepcionHora(Exception):
@@ -86,15 +87,32 @@ def mainmenu():
 
 def RegisterUsers():
     
+    def setName():
+        entername.set("")
+        name = nombre.get()
+        print(name)
+    
+
     for widget in win.winfo_children():
         widget.destroy()
 
     win.title("Registrar Usuarios")
     
-    text = tk.Label(text="Hola")
+    text = tk.Label(text="Registrar Usuarios")
     text.pack()
 
+    nombre = tk.Entry(bd=4,textvariable=entername)
+    nombre.pack()
+
+    registname = tk.Button(text="Guardar nombre", command=setName)
+    registname.pack()
+  
+
     win.mainloop()
+
+
+
+
 
 def ConsultUsers():
     pass
@@ -117,8 +135,6 @@ Nombreinput = tk.Entry(bd=4, textvariable=entername)
 Nombreinput.pack(pady=5,padx=5)
 
 #clear Function
-def clear():
-    entername.set("")
 
 def setName():
     name = Nombreinput.get()
