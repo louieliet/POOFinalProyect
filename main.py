@@ -93,7 +93,9 @@ def mainmenu():
 
     students = []
     a = Estudiante()
-    
+
+    for i in range(2):
+        pass
 
 
     print(random.choice(ListadeEstudiantes))
