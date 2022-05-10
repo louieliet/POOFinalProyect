@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from typing import final
 
 
 
@@ -58,6 +59,15 @@ class Profesor(Estacionamiento):
 #Estudiante object
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
+#List of students
+
+students = list()
+for i in range (10):
+    students.append(Estudiante("Emi", 241718 ,"Estudiante","Animación","2do"))
+
+#List of Teachers
+
+
 
 #Init window
 win = tk.Tk()
@@ -76,8 +86,11 @@ def mainmenu():
     win.geometry("500x500")
     win.title("Proyecto Programación Orientada a Objetos")
 
-    register = tk.Button(text="Registrar Usuarios", command=RegisterUsers)
-    register.pack()
+    registerstudent = tk.Button(text="Registrar Alumno", command=RegisterUsers)
+    registerstudent.pack()
+
+    registerteacher = tk.Button(text="Registrar Profesor", command=RegisterUsers)
+    registerteacher.pack()
     
     consult = tk.Button(text="Consultar un usuario", command=ConsultUsers)
     consult.pack()
@@ -87,7 +100,7 @@ def mainmenu():
 
 def RegisterUsers():
     
-    def setName():
+    def finalRegister():
         name = nombre.get()
         print(name)
         entername.set("")
@@ -103,8 +116,16 @@ def RegisterUsers():
 
     nombre = tk.Entry(bd=4,textvariable=entername)
     nombre.pack()
+    nombre = tk.Entry(bd=4,textvariable=entername)
+    nombre.pack()
+    nombre = tk.Entry(bd=4,textvariable=entername)
+    nombre.pack()
+    nombre = tk.Entry(bd=4,textvariable=entername)
+    nombre.pack()
+    nombre = tk.Entry(bd=4,textvariable=entername)
+    nombre.pack()
 
-    registname = tk.Button(text="Guardar nombre", command=setName)
+    registname = tk.Button(text="Guardar nombre", command=finalRegister)
     registname.pack()
   
 
