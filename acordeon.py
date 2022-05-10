@@ -1,28 +1,29 @@
 import tkinter
 
 
-import tkinter
-
-win = tkinter.Tk()
-win.geometry("500x500")
-
 def hola(name):
-    print("Hola putos" + name)
+    print("Hola, " + name)
 
 
 def savetext():
-    texto = textbox.get()
+    texto = cajitadetexto.get()
     print(texto)
 
-b1 = tkinter.Button(win, text = "Click", padx = 50, pady = 20, command = savetext)
-b1.pack()
+
+pantalla = tkinter.Tk()
+pantalla.geometry("500x500")
 
 
-textbox = tkinter.Entry(win, font = "Helvetica")
-textbox.pack()
+cajitadetexto = tkinter.Entry(pantalla, font="Helvetica 20")
+cajitadetexto.pack()
+
+texto = tkinter.Label(pantalla,text="Hola", bg = "red")
+texto.pack(side = tkinter.TOP)
+texto.pack(fill = tkinter.Y, expand= True)
 
 
+boton1 = tkinter.Button(pantalla, text = "Play", command = savetext)
+boton1.pack()
 
-text = tkinter.Label(win,text="Hola", bg = "blue")
-text.pack(fill = tkinter.Y, expand= True)
-win.mainloop()
+
+pantalla.mainloop()
