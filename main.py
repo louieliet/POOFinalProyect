@@ -88,9 +88,9 @@ def mainmenu():
 def RegisterUsers():
     
     def setName():
-        entername.set("")
         name = nombre.get()
         print(name)
+        entername.set("")
     
 
     for widget in win.winfo_children():
