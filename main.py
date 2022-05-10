@@ -1,6 +1,7 @@
 from  tkinter import *
 from tkinter import ttk
 import sys
+import tkinter
 
 
 class ExcepcionHora(Exception):
@@ -56,11 +57,12 @@ class Profesor(Estacionamiento):
 
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
-p1.setHoradeLlegada()
-p1.setLugar()
 
-print(p1.hora_llegada)
-print(p1.lugar)
-print(p1.id)
+win = tkinter.Tk()
+win.geometry("500x500")
+
+text = tkinter.Label(win,text="Hola")
+text.pack()
+win.mainloop()
 
 
