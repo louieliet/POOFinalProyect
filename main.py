@@ -1,6 +1,8 @@
+from random import random
 import tkinter as tk
 from tkinter import *
 from typing import final
+import random
 
 
 
@@ -46,24 +48,27 @@ class Estacionamiento():
                 print("Introduzca placas válidas")
     
 class Estudiante(Estacionamiento):
-    def __init__(self, nombre, id, ocupacion, carrera, semestre):
-        super().__init__(nombre, id, ocupacion)
+    def __init__(self, nombre, _id, ocupacion, carrera, semestre):
+        super().__init__(nombre, _id, ocupacion)
         self.carrera = carrera
         self.semestre = semestre
     
 class Profesor(Estacionamiento):
-    def __init__(self, nombre, id, ocupacion):
-        super().__init__(nombre, id, ocupacion)
+    def __init__(self, nombre, __id, ocupacion):
+        super().__init__(nombre, __id, ocupacion)
 
 
 #Estudiante object
 p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 
+
+
+
+
+
 #List of students
 
-students = list()
-for i in range (10):
-    students.append(Estudiante("Emi", 241718 ,"Estudiante","Animación","2do"))
+liststudents = Estudiante
 
 #List of Teachers
 
@@ -79,6 +84,19 @@ entername = StringVar()
 #Creating the main menu
 
 def mainmenu():
+
+    ListadeEstudiantes = ["Emi", "Liz", "Ari"]
+    ListadeIDS = [123,456,789]
+    ListadeOcupaciones = ["Estudiante", "Estudiante", "Estudiante"]
+    ListadeCarreras = ["Animacion","Animacion","Animacion"]
+    ListadeSemestres = [1,2,3]
+
+    students = []
+    a = Estudiante()
+    
+
+
+    print(random.choice(ListadeEstudiantes))
 
     for widget in win.winfo_children():
         widget.destroy()
