@@ -60,12 +60,5 @@ p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
 win = tkinter.Tk()
 win.geometry("500x500")
 
-b1 = tkinter.Button(win, text= "Click")
-b2 = tkinter.Button(win, text= "Click2")
-b3 = tkinter.Button(win, text= "Click3")
-
-b1.grid(row = 0, column = 0)
-b2.grid(row = 1, column = 0)
-b3.grid(row = 2, column = 0)
 
 win.mainloop()
