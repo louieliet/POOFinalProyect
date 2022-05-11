@@ -122,8 +122,6 @@ enterplacas = StringVar()
 enterarea = StringVar()
 
 
-studentdatabase = "studentdata.csv"
-
 #Creating the main menu
 def mainmenu():
 
