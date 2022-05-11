@@ -10,6 +10,12 @@ from PIL import Image
 from PIL import ImageTk
 
 
+class PlacasError(Exception):
+    pass
+
+class IDError(Exception):
+    pass
+
 #Creating the abstract class: Parking lot
 class Estacionamiento():
     def __init__(self):
@@ -30,27 +36,23 @@ class Estacionamiento():
     #method to enter the arrival time
     def setHoradeLlegada(self, hora):
         self.hora_llegada = hora
-        
+       
     #method to enter the parking lot's place
     def setLugar(self, lugar):
-        running = True
-        while running:
-            try:
-                self.lugar = lugar
-                running = False
-            except ValueError:
-                print("Introduzca un valor válido")
-          
+        self.lugar=lugar
+         
     #method to enter the license plate
     def setPlacas(self, placas):
-        running = True
-        while running:
-            try:
+        try:
+            if(len(placas)==6):
                 self.__placas = placas
-                running = False
-            except ValueError:
-                print("Introduzca placas válidas")
+            else:
+                raise PlacasError        
+        except PlacasError:
+            print("Introduzca placas validas")
 
+        
+        
     #method to print all the user's information
     def printData(self):
         print(vars(self))
@@ -65,7 +67,7 @@ class Estudiante(Estacionamiento):
     def __init__(self):
         self.carrera = " "
         self.ocupacion = "Estudiante"
-    
+   
     #method to enter the student's career
     def setCarrera(self, carrera):
         self.carrera = carrera
@@ -76,7 +78,7 @@ class Estudiante(Estacionamiento):
             studentdata = csv.writer(studentdata, delimiter="|")
             studentdata.writerow(["Nombre | ID | Carrera | Placas | Hora de llegada | Lugar"])
             studentdata.writerow([self.nombre,self.id,self.carrera,self.getPlacas(),self.hora_llegada,self.lugar])
-    
+   
     #method to clear the students' text file
     def clearSData(self):
         with open("studentdata.csv",mode="w") as studentdata:
@@ -100,7 +102,7 @@ class Profesor(Estacionamiento):
             teacherdata = csv.writer(teacherdata, delimiter="|")
             teacherdata.writerow(["Nombre | ID | Area | Placas | Hora de llegada | Lugar "])
             teacherdata.writerow([self.nombre,self.id,self.area,self.getPlacas(),self.hora_llegada,self.lugar])
-    
+   
     #method to clear the teachers' text file
     def clearTData(self):
         with open("teacherdata.csv",mode="w") as teacherdata:
@@ -125,23 +127,20 @@ enterarea = StringVar()
 #Creating the main menu
 def mainmenu():
 
-
-   
-
     for widget in win.winfo_children():
         widget.destroy()
 
-    
+   
     image = Image.open("bg.jpg")
     image = ImageTk.PhotoImage(image)
 
     bg = tk.Label(win,image=image)
     bg.place(x=0, y=0, relwidth=1, relheight=1)
-    
+   
     win.geometry("500x500")
     win.title("Proyecto Programación Orientada a Objetos")
-    
-    
+   
+   
     estacionamiento = tk.Label(text="Bienvenido al Estacionamiento")
     welcome = tk.Label(text="Menú de opciones")
     estacionamiento.pack()
@@ -150,9 +149,9 @@ def mainmenu():
     registerstudent = tk.Button(text="Registrar Alumnos", command=RegistStudents, height="5", width="15")
     registerstudent.pack()
 
-    registerteacher = tk.Button(text="Registrar Docentes", command=RegistTeachers, height="5", width="15")   
+    registerteacher = tk.Button(text="Registrar Docentes", command=RegistTeachers, height="5", width="15")  
     registerteacher.pack()
-    
+   
     win.mainloop()
 
 
@@ -160,7 +159,7 @@ def mainmenu():
 def RegistStudents():
     listStudents = []
     student = Estudiante()
-    
+   
     def finalRegister():
         name = NOMBRE.get()
         iD = ID.get()
@@ -186,7 +185,7 @@ def RegistStudents():
         enterplacas.set("")
         enterhora.set("")
         enterlugar.set("")
-    
+   
 
     for widget in win.winfo_children():
         widget.destroy()
@@ -199,12 +198,12 @@ def RegistStudents():
 
     win.title("Registrar Alumnos")
     win.resizable = False
-    
+   
     text = tk.Label(text="Registrar Alumnos")
     text.pack()
 
 
-    #register the name 
+    #register the name
     nombrescreen = tk.Label(win,text= "Nombre: ")
     nombrescreen.pack()
 
@@ -231,7 +230,7 @@ def RegistStudents():
 
     PLACAS = tk.Entry(bd=4,textvariable=enterplacas)
     PLACAS.pack()
-    
+   
     #register the arrival time
     horascreen = tk.Label(win, text="Hora:")
     horascreen.pack()
@@ -254,14 +253,14 @@ def RegistStudents():
     back_to_menu = tk.Button(text="Volver al menú", command=mainmenu)
     back_to_menu.pack()
 
-    
+   
     win.mainloop()
 
 
 
 #Regist Teachers
 def RegistTeachers():
-    win.resizable = False   
+    win.resizable = False  
     listTeachers = []
     teachers = Profesor()
     teachers.clearTData()
@@ -290,7 +289,7 @@ def RegistTeachers():
         enterplacas.set("")
         enterhora.set("")
         enterlugar.set("")
-    
+   
 
     for widget in win.winfo_children():
         widget.destroy()
@@ -300,10 +299,10 @@ def RegistTeachers():
 
     bg = tk.Label(win,image=image)
     bg.place(x=0, y=0, relwidth=1, relheight=1)
-    
+   
 
     win.title("Registrar Docentes")
-    
+   
     text = tk.Label(text="Registrar Docentes")
     text.pack()
 
@@ -335,7 +334,7 @@ def RegistTeachers():
 
     PLACAS = tk.Entry(bd=4,textvariable=enterplacas)
     PLACAS.pack()
-    
+   
     #register the arrival time
     horascreen = tk.Label(win, text="Hora:")
     horascreen.pack()
@@ -359,7 +358,7 @@ def RegistTeachers():
     back_to_menu.pack()
 
     win.mainloop()
-    
+   
 if __name__ == "__main__":
     s = Estudiante()
     s.clearSData()
@@ -367,10 +366,4 @@ if __name__ == "__main__":
     t.clearTData()
 
     mainmenu()
-
-
-
-
-
-
 
