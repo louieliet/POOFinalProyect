@@ -125,6 +125,9 @@ enterarea = StringVar()
 #Creating the main menu
 def mainmenu():
 
+
+   
+
     for widget in win.winfo_children():
         widget.destroy()
 
@@ -157,8 +160,7 @@ def mainmenu():
 def RegistStudents():
     listStudents = []
     student = Estudiante()
-    student.clearSData()
-
+    
     def finalRegister():
         name = NOMBRE.get()
         iD = ID.get()
@@ -359,6 +361,11 @@ def RegistTeachers():
     win.mainloop()
     
 if __name__ == "__main__":
+    s = Estudiante()
+    s.clearSData()
+    t = Profesor()
+    t.clearTData()
+
     mainmenu()
 
 
