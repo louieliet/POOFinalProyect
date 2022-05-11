@@ -1,115 +1,92 @@
 from random import random
 import tkinter as tk
 from tkinter import *
+import tkinter
 from typing import final
 import random
 
-
-
 #Creating all start stuff
-class ExcepcionHora(Exception):
-    def __init__(self, hora):
-        self.hora = hora
-
 class Estacionamiento():
-    def __init__(self, nombre, _id, ocupacion):
-        self.nombre = nombre
-        self.id = _id
-        self.ocupacion = ocupacion
+    def __init__(self):
+        self.nombre = " "
+        self.id = " "
         self.__placas = ""
         self.hora_llegada = 0
         self.lugar = 0
-    
-    def setHoradeLlegada(self):
-        running = True
-        while running:
-            try:
-                self.hora_llegada = int(input("Introduzca la hora de llegada: "))
-                running = False
-            except ValueError:
-                print("Introduzca una hora válida")
+
+    def setName(self,name):
+        self.nombre = name
+
+    def setID(self, iD):
+        self.id = iD
+
+    def setHoradeLlegada(self, hora):
+        self.hora_llegada = hora
         
-    def setLugar(self):
+    def setLugar(self, lugar):
         running = True
         while running:
             try:
-                self.lugar = int(input("Introduzca el lugar (#) de estacionamiento: "))
+                self.lugar = lugar
                 running = False
             except ValueError:
                 print("Introduzca un valor válido")
           
-    def setPlacas(self):
+    def setPlacas(self, placas):
         running = True
         while running:
             try:
-                self.__placas = str(input("Placas del coche: "))
+                self.__placas = placas
                 running = False
             except ValueError:
                 print("Introduzca placas válidas")
     
+    def printData(self):
+        print(vars(self))
+
+
 class Estudiante(Estacionamiento):
-    def __init__(self, nombre, _id, ocupacion, carrera, semestre):
-        super().__init__(nombre, _id, ocupacion)
-        self.carrera = carrera
-        self.semestre = semestre
+    def __init__(self):
+        self.carrera = " "
+        self.ocupacion = "Estudiante"
     
+    def setCarrera(self, carrera):
+        self.carrera = carrera
 class Profesor(Estacionamiento):
-    def __init__(self, nombre, __id, ocupacion):
-        super().__init__(nombre, __id, ocupacion)
+    def __init__(self):
+        self.area = ""
+        self.ocupacion = "Docente"
 
-
-#Estudiante object
-p1 = Estudiante("Emi", 241718 ,"Estudiante","Animación","2do")
-
-
-
-
-
-
-#List of students
-
-liststudents = Estudiante
-
-#List of Teachers
-
+    def setArea(self, area):
+        self.area = area
 
 
 #Init window
 win = tk.Tk()
 
 #Some other stuff
-global entername
+global entername, enterid, entercarrera, enterhora, enterlugar, enterplacas, enterarea
 entername = StringVar()
+enterid = StringVar()
+entercarrera = StringVar()
+enterhora = StringVar()
+enterlugar = StringVar()
+enterplacas = StringVar()
+enterarea = StringVar()
+
+
 
 #Creating the main menu
 
 def mainmenu():
 
-    ListadeEstudiantes = ["Emi", "Liz", "Ari"]
-    ListadeIDS = [123,456,789]
-    ListadeOcupaciones = ["Estudiante", "Estudiante", "Estudiante"]
-    ListadeCarreras = ["Animacion","Animacion","Animacion"]
-    ListadeSemestres = [1,2,3]
-
-    students = []
-    a = Estudiante()
-
-    for i in range(2):
-        pass
-
-
-    print(random.choice(ListadeEstudiantes))
-
-    for widget in win.winfo_children():
-        widget.destroy()
-
     win.geometry("500x500")
     win.title("Proyecto Programación Orientada a Objetos")
 
-    registerstudent = tk.Button(text="Registrar Alumno", command=RegisterUsers)
+    registerstudent = tk.Button(text="Registrar Alumno", command=RegisterStudents)
     registerstudent.pack()
 
-    registerteacher = tk.Button(text="Registrar Profesor", command=RegisterUsers)
+    registerteacher = tk.Button(text="Registrar Profesor")
     registerteacher.pack()
     
     consult = tk.Button(text="Consultar un usuario", command=ConsultUsers)
@@ -118,12 +95,35 @@ def mainmenu():
     win.mainloop()
 
 
-def RegisterUsers():
+def RegisterStudents():
     
+    listStudents = []
+    student = Estudiante()
+
     def finalRegister():
-        name = nombre.get()
-        print(name)
+        name = NOMBRE.get()
+        iD = ID.get()
+        carrera = CARRERA.get()
+        placas = PLACAS.get()
+        hora = HORA.get()
+        lugar = LUGAR.get()
+
+        for i in range(1):
+            student.setName(name)
+            student.setID(iD)
+            student.setCarrera(carrera)
+            student.setPlacas(placas)
+            student.setHoradeLlegada(hora)
+            student.setLugar(lugar)
+            listStudents.append(student)
+            student.printData()
+
         entername.set("")
+        enterid.set("")
+        entercarrera.set("")
+        enterplacas.set("")
+        enterhora.set("")
+        enterlugar.set("")
     
 
     for widget in win.winfo_children():
@@ -131,19 +131,55 @@ def RegisterUsers():
 
     win.title("Registrar Usuarios")
     
-    text = tk.Label(text="Registrar Usuarios")
+    text = tk.Label(text="Registrar Alumnos")
     text.pack()
 
-    nombre = tk.Entry(bd=4,textvariable=entername)
-    nombre.pack()
-    nombre = tk.Entry(bd=4,textvariable=entername)
-    nombre.pack()
-    nombre = tk.Entry(bd=4,textvariable=entername)
-    nombre.pack()
-    nombre = tk.Entry(bd=4,textvariable=entername)
-    nombre.pack()
-    nombre = tk.Entry(bd=4,textvariable=entername)
-    nombre.pack()
+
+    #Registro nombre 
+    nombrescreen = tk.Label(win,text= "Nombre: ")
+    nombrescreen.pack()
+
+    NOMBRE = tk.Entry(bd=4,textvariable=entername)
+    NOMBRE.pack()
+
+    #Registro id
+    idscreen = tk.Label(win, text= "ID: ")
+    idscreen.pack()
+
+    ID = tk.Entry(bd=4,textvariable=enterid)
+    ID.pack()
+
+    #Registro carrera
+
+    carrerascreen = tk.Label(win,text="Carrera: ")
+    carrerascreen.pack()
+
+    CARRERA = tk.Entry(bd=4,textvariable=entercarrera)
+    CARRERA.pack()
+
+    #Registro placas
+    
+    placasscreen = tk.Label(win, text= "Placas: ")
+    placasscreen.pack()
+
+    PLACAS = tk.Entry(bd=4,textvariable=enterplacas)
+    PLACAS.pack()
+    
+    #Registro hora
+
+    horascreen = tk.Label(win, text="Hora:")
+    horascreen.pack()
+
+    HORA = tk.Entry(bd=4,textvariable=enterhora)
+    HORA.pack()
+
+    #Registro lugar
+
+    lugarscreen = tk.Label(win, text="Lugar: ")
+    lugarscreen.pack()
+
+    LUGAR = tk.Entry(bd=4,textvariable=enterlugar)
+    LUGAR.pack()
 
     registname = tk.Button(text="Guardar nombre", command=finalRegister)
     registname.pack()
@@ -204,6 +240,14 @@ SaveID.pack()
 
 Clear = tk.Button(text="Borrar",command=clear)
 Clear.pack()
+
+
+
+
+
+
+
+
 
 """""""""
 
