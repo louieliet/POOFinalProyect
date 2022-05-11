@@ -57,11 +57,11 @@ class Estudiante(Estacionamiento):
     def setCarrera(self, carrera):
         self.carrera = carrera
 
-    def outData(self):
+    def outSData(self):
         with open("studentdata.csv",mode="a") as studentdata:
             studentdata = csv.writer(studentdata, delimiter=",")
-            studentdata.writerow([self.nombre,self.id,self.carrera,self.getPlacas(),self.hora_llegada,self.lugar])
-    def clearData(self):
+            studentdata.writerow([self.nombre,self.id,self.carrera,self.getPlacas(),self.hora_llegada,self.lugar,self.ocupacion])
+    def clearSData(self):
         with open("studentdata.csv",mode="w") as studentdata:
             studentdata = csv.writer(studentdata, delimiter=",",quotechar='"', quoting=csv.QUOTE_MINIMAL)
             studentdata.writerow(" ")
@@ -72,7 +72,15 @@ class Profesor(Estacionamiento):
 
     def setArea(self, area):
         self.area = area
-
+        
+    def outTData(self):
+        with open("teacherdata.csv",mode="a") as teacherdata:
+            teacherdata = csv.writer(teacherdata, delimiter=",")
+            teacherdata.writerow([self.nombre,self.id,self.hora_llegada, self.lugar, self.getPlacas(),self.area,self.ocupacion])
+    def clearTData(self):
+        with open("teacherdata.csv",mode="w") as teacherdata:
+            teacherdata = csv.writer(teacherdata, delimiter=",",quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            teacherdata.writerow(" ")
 
 
 #Init window
@@ -107,8 +115,11 @@ def mainmenu():
     registerteacher = tk.Button(text="Registrar Profesor", command=RegistTeachers)   
     registerteacher.pack()
     
-    consult = tk.Button(text="Consultar un usuario", command=ConsultUser)
-    consult.pack()
+    consults = tk.Button(text="Consultar un estudiante", command=ConsultStudent)
+    consults.pack()
+
+    consultt = tk.Button(text="Consultar un docente", command=ConsultTeacher)
+    consultt.pack()
 
     win.mainloop()
 
@@ -119,7 +130,7 @@ def RegistStudents():
 
     listStudents = []
     student = Estudiante()
-    student.clearData()
+    student.clearSData()
 
     def finalRegister():
         name = NOMBRE.get()
@@ -138,7 +149,7 @@ def RegistStudents():
             student.setLugar(lugar)
             listStudents.append(student)
             student.printData()
-            student.outData()
+            student.outSData()
 
         entername.set("")
         enterid.set("")
@@ -219,7 +230,7 @@ def RegistTeachers():
     
     listTeachers = []
     teachers = Profesor()
-
+    teachers.clearTData()
     def finalRegister():
         name = NOMBRE.get()
         iD = ID.get()
@@ -237,6 +248,7 @@ def RegistTeachers():
             teachers.setLugar(lugar)
             listTeachers.append(teachers)
             teachers.printData()
+            teachers.outTData()
 
         entername.set("")
         enterid.set("")
@@ -310,7 +322,36 @@ def RegistTeachers():
     win.mainloop()
 
 
-def ConsultUser():
+def ConsultStudent():
+
+    with open("studentdata.csv", "rb") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print(row)
+
+    with open("teacherdata.csv", "rb") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print(row)
+
+    for widget in win.winfo_children():
+        widget.destroy()
+    
+    namerequest = tk.Label(text="Introduzca su nombre:")
+    entername = tk.Entry(bd=4)
+    idrequest = tk.Label(text="Introduzca su ID:")
+    enterid = tk.Entry(bd=4)
+    namerequest.pack()
+    entername.pack()
+    idrequest.pack()
+    enterid.pack()
+
+    nombre = entername.get()
+    iD = enterid.get()
+
+    win.mainloop()
+
+def ConsultTeacher():
 
     for widget in win.winfo_children():
         widget.destroy()
