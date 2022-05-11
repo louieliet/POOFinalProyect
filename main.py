@@ -80,22 +80,27 @@ enterarea = StringVar()
 
 def mainmenu():
 
+    for widget in win.winfo_children():
+        widget.destroy()
+
     win.geometry("500x500")
     win.title("Proyecto Programación Orientada a Objetos")
 
-    registerstudent = tk.Button(text="Registrar Alumno", command=RegisterStudents)
+    registerstudent = tk.Button(text="Registrar Alumno", command=RegistStudents)
     registerstudent.pack()
 
-    registerteacher = tk.Button(text="Registrar Profesor")
+    registerteacher = tk.Button(text="Registrar Profesor", command=RegistTeachers)   
     registerteacher.pack()
     
-    consult = tk.Button(text="Consultar un usuario", command=ConsultUsers)
+    consult = tk.Button(text="Consultar un usuario", command=ConsultUser)
     consult.pack()
 
     win.mainloop()
 
 
-def RegisterStudents():
+#Function and menu to students
+
+def RegistStudents():
     
     listStudents = []
     student = Estudiante()
@@ -183,16 +188,133 @@ def RegisterStudents():
 
     registname = tk.Button(text="Guardar nombre", command=finalRegister)
     registname.pack()
-  
+
+    back_to_menu = tk.Button(text="Volver al menú", command=mainmenu)
+    back_to_menu.pack()
 
     win.mainloop()
 
 
 
+#Regist Teachers
+def RegistTeachers():
+    
+    listTeachers = []
+    teachers = Profesor()
+
+    def finalRegister():
+        name = NOMBRE.get()
+        iD = ID.get()
+        hora = HORA.get()
+        lugar = LUGAR.get()
+        placas = PLACAS.get()
+        area = AREA.get()
+
+        for i in range(1):
+            teachers.setName(name)
+            teachers.setID(iD)
+            teachers.setArea(area)
+            teachers.setPlacas(placas)
+            teachers.setHoradeLlegada(hora)
+            teachers.setLugar(lugar)
+            listTeachers.append(teachers)
+            teachers.printData()
+
+        entername.set("")
+        enterid.set("")
+        enterarea.set("")
+        enterplacas.set("")
+        enterhora.set("")
+        enterlugar.set("")
+    
+
+    for widget in win.winfo_children():
+        widget.destroy()
+
+    win.title("Registrar Docentes")
+    
+    text = tk.Label(text="Registrar Docentes")
+    text.pack()
 
 
-def ConsultUsers():
-    pass
+    #Registro nombre 
+    nombrescreen = tk.Label(win,text= "Nombre: ")
+    nombrescreen.pack()
+
+    NOMBRE = tk.Entry(bd=4,textvariable=entername)
+    NOMBRE.pack()
+
+    #Registro id
+    idscreen = tk.Label(win, text= "ID: ")
+    idscreen.pack()
+
+    ID = tk.Entry(bd=4,textvariable=enterid)
+    ID.pack()
+
+    #Registro carrera
+
+    carrerascreen = tk.Label(win,text="Área: ")
+    carrerascreen.pack()
+
+    AREA = tk.Entry(bd=4,textvariable=enterarea)
+    AREA.pack()
+
+    #Registro placas
+    
+    placasscreen = tk.Label(win, text= "Placas: ")
+    placasscreen.pack()
+
+    PLACAS = tk.Entry(bd=4,textvariable=enterplacas)
+    PLACAS.pack()
+    
+    #Registro hora
+
+    horascreen = tk.Label(win, text="Hora:")
+    horascreen.pack()
+
+    HORA = tk.Entry(bd=4,textvariable=enterhora)
+    HORA.pack()
+
+    #Registro lugar
+
+    lugarscreen = tk.Label(win, text="Lugar: ")
+    lugarscreen.pack()
+
+    LUGAR = tk.Entry(bd=4,textvariable=enterlugar)
+    LUGAR.pack()
+
+    registname = tk.Button(text="Guardar nombre", command=finalRegister)
+    registname.pack()
+
+    back_to_menu = tk.Button(text="Volver al menú", command=mainmenu)
+    back_to_menu.pack()
+
+    win.mainloop()
+
+
+def ConsultUser():
+    for widget in win.winfo_children():
+        widget.destroy()
+    
+    namerequest = tk.Label(text="Introduzca su nombre:")
+    entername = tk.Entry(bd=4)
+    idrequest = tk.Label(text="Introduzca su ID:")
+    enterid = tk.Entry(bd=4)
+    namerequest.pack()
+    entername.pack()
+    idrequest.pack()
+    enterid.pack()
+
+    nombre = namerequest.get()
+    iD = idrequest.get()
+    
+
+
+
+
+
+
+
 
 
 
@@ -204,51 +326,7 @@ if __name__ == "__main__":
 
 
 
-"""""""""""""""
-#Creating the register menu
-Nombre = tk.Label(text="Introduzca su nombre: ")
-Nombre.pack(pady=2,padx=2)
-Nombreinput = tk.Entry(bd=4, textvariable=entername)
-Nombreinput.pack(pady=5,padx=5)
-
-#clear Function
-
-def setName():
-    name = Nombreinput.get()
-    print(name)
-
-SaveName = tk.Button(text="Guardar usuario",command=setName)
-SaveName.pack()
-
-Clear = tk.Button(text="Nuevo usuario",command=clear)
-Clear.pack()
 
 
-#Id
-ID = tk.Label(text="Introduzca su id: ")
-ID.pack(pady=2,padx=2)
-IDinput = tk.Entry(bd=4, textvariable=entername)
-IDinput.pack(pady=5,padx=5)
-
-
-def setID():
-    ID = IDinput.get()
-    print(ID)
-
-SaveID = tk.Button(text="Guardar ID",command=setName)
-SaveID.pack()
-
-Clear = tk.Button(text="Borrar",command=clear)
-Clear.pack()
-
-
-
-
-
-
-
-
-
-"""""""""
 
 
