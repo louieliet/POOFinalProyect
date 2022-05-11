@@ -4,6 +4,7 @@ from tkinter import *
 import tkinter
 from typing import final
 import random
+import csv
 
 #Creating all start stuff
 class Estacionamiento():
@@ -40,18 +41,30 @@ class Estacionamiento():
                 running = False
             except ValueError:
                 print("Introduzca placas válidas")
-    
+
     def printData(self):
         print(vars(self))
 
+    def getPlacas(self):
+        return self.__placas
 
 class Estudiante(Estacionamiento):
     def __init__(self):
         self.carrera = " "
         self.ocupacion = "Estudiante"
+        self.lista = []
     
     def setCarrera(self, carrera):
         self.carrera = carrera
+
+    def outData(self):
+        with open("studentdata.csv",mode="a") as studentdata:
+            studentdata = csv.writer(studentdata, delimiter=",")
+            studentdata.writerow([self.nombre,self.id,self.carrera,self.getPlacas(),self.hora_llegada,self.lugar])
+    def clearData(self):
+        with open("studentdata.csv",mode="w") as studentdata:
+            studentdata = csv.writer(studentdata, delimiter=",",quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            studentdata.writerow(" ")
 class Profesor(Estacionamiento):
     def __init__(self):
         self.area = ""
@@ -59,6 +72,7 @@ class Profesor(Estacionamiento):
 
     def setArea(self, area):
         self.area = area
+
 
 
 #Init window
@@ -75,6 +89,7 @@ enterplacas = StringVar()
 enterarea = StringVar()
 
 
+studentdatabase = "studentdata.csv"
 
 #Creating the main menu
 
@@ -101,9 +116,10 @@ def mainmenu():
 #Function and menu to students
 
 def RegistStudents():
-    
+
     listStudents = []
     student = Estudiante()
+    student.clearData()
 
     def finalRegister():
         name = NOMBRE.get()
@@ -122,6 +138,7 @@ def RegistStudents():
             student.setLugar(lugar)
             listStudents.append(student)
             student.printData()
+            student.outData()
 
         entername.set("")
         enterid.set("")
@@ -192,6 +209,7 @@ def RegistStudents():
     back_to_menu = tk.Button(text="Volver al menú", command=mainmenu)
     back_to_menu.pack()
 
+    
     win.mainloop()
 
 
@@ -293,6 +311,7 @@ def RegistTeachers():
 
 
 def ConsultUser():
+
     for widget in win.winfo_children():
         widget.destroy()
     
@@ -305,22 +324,12 @@ def ConsultUser():
     idrequest.pack()
     enterid.pack()
 
-    nombre = namerequest.get()
-    iD = idrequest.get()
+    nombre = entername.get()
+    iD = enterid.get()
+
+    win.mainloop()
+
     
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     mainmenu()
 

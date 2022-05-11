@@ -29,3 +29,14 @@ Inicio del programa:
 
     for i in range (len(listStudents)):
         listStudents[i].printData()
+
+
+
+Profe:
+    nombre
+    id
+    hora
+    lugar
+    placas
+    area
+    ocupacion
