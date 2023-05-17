@@ -56,45 +56,70 @@ class ParkingApp:
     def __init__(self):
         self.root = ctk.CTk()
         self.root.title("Proyecto Programación Orientada a Objetos")
-        self.root.geometry("720x1000")
+        self.root.geometry("700x600")
         self.root.resizable(False, False)
-
+    
     def show_main_menu(self):
         self.clear_root()
-        self.root.configure(bg="white")
-        estacionamiento_label = ctk.CTkLabel(self.root, text="Bienvenido al Estacionamiento", font=ctk.CTkFont(size=30, weight="bold"))
-        estacionamiento_label.pack(pady=20)
-        menu_label = ctk.CTkLabel(self.root, text="Menú de opciones", font=("Arial", 14))
+        self.root.configure(bg_color="#f2f2f2")  # Cambia el color de fondo
+        
+
+        estacionamiento_label = ctk.CTkLabel(self.root, text="Estacionamiento UP", font=ctk.CTkFont(size=40, weight="bold"))
+        estacionamiento_label.pack(pady=40)
+
+        menu_label = ctk.CTkLabel(self.root, text="Menú de opciones", font=ctk.CTkFont(size=30, weight="bold"))
         menu_label.pack(pady=20)
-        register_student_button = ctk.CTkButton(self.root, text="Registrar Estudiante", font=ctk.CTkFont(size=30, weight="bold"), command=self.show_student_registration)
-        register_student_button.pack()
-        register_teacher_button = ctk.CTkButton(self.root, text="Registrar Profesor", font=ctk.CTkFont(size=30, weight="bold"), command=self.show_teacher_registration)
-        register_teacher_button.pack()
+
+        menu_frame = ctk.CTkFrame(self.root)
+        menu_frame.pack()
+
+        button_frame = ctk.CTkFrame(menu_frame)
+        button_frame.pack()
+
+        register_student_button = ctk.CTkButton(button_frame, text="Registrar Estudiante", font=ctk.CTkFont(size=25, weight="bold"), command=self.show_student_registration)
+        register_student_button.pack(pady=10, padx=20)
+
+        register_teacher_button = ctk.CTkButton(button_frame, text="Registrar Profesor", font=ctk.CTkFont(size=25, weight="bold"), command=self.show_teacher_registration)
+        register_teacher_button.pack(pady=10, padx=20)
+    
 
     def show_student_registration(self):
         self.clear_root()
+
         title_label = ctk.CTkLabel(self.root, text="Registrar Alumnos", font=ctk.CTkFont(size=30, weight="bold"))
         title_label.pack(pady=20)
-        name_label = ctk.CTkLabel(self.root, text="Nombre:", font=ctk.CTkFont(size=30, weight="bold"))
+
+        form_frame = ctk.CTkFrame(self.root)
+        form_frame.pack()
+
+        name_label = ctk.CTkLabel(form_frame, text="Nombre:", font=ctk.CTkFont(size=15))
         name_label.pack()
-        self.name_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
-        self.name_entry.pack()
-        id_label = ctk.CTkLabel(self.root, text="ID:", font=ctk.CTkFont(size=30, weight="bold"))
+        self.name_entry = ctk.CTkEntry(form_frame, placeholder_text="Ej. Pedro")
+        self.name_entry.pack(fill="x", padx=10, pady=5)
+
+        id_label = ctk.CTkLabel(form_frame, text="ID:", font=ctk.CTkFont(size=15))
         id_label.pack()
-        self.id_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
-        self.id_entry.pack()
-        plates_label = ctk.CTkLabel(self.root, text="Placas:", font=ctk.CTkFont(size=30, weight="bold"))
+        self.id_entry = ctk.CTkEntry(form_frame, placeholder_text="Ej. 0222222")
+        self.id_entry.pack(fill="x", padx=10, pady=5)
+
+        plates_label = ctk.CTkLabel(form_frame, text="Placas:", font=ctk.CTkFont(size=15))
         plates_label.pack()
-        self.plates_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
-        self.plates_entry.pack()
-        carrera_label = ctk.CTkLabel(self.root, text="Carrera:", font=ctk.CTkFont(size=30, weight="bold"))
+        self.plates_entry = ctk.CTkEntry(form_frame, placeholder_text="Ej. H12VF")
+        self.plates_entry.pack(fill="x", padx=10, pady=5)
+
+        carrera_label = ctk.CTkLabel(form_frame, text="Carrera:", font=ctk.CTkFont(size=15))
         carrera_label.pack()
-        self.carrera_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
-        self.carrera_entry.pack()
-        register_button = ctk.CTkButton(self.root, text="Registrar", command=self.register_student, font=ctk.CTkFont(size=30, weight="bold"))
-        register_button.pack()
-        back_to_menu = ctk.CTkButton(self.root, text="Volver al menú", command=self.show_main_menu, font=ctk.CTkFont(size=30, weight="bold"))
-        back_to_menu.pack()
+        self.carrera_entry = ctk.CTkEntry(form_frame, placeholder_text="Ej. Ing. en ...")
+        self.carrera_entry.pack(fill="x", padx=10, pady=5)
+
+        button_frame = ctk.CTkFrame(self.root)
+        button_frame.pack(pady=30)
+
+        register_button = ctk.CTkButton(button_frame, text="Registrar", command=self.register_student, font=ctk.CTkFont(size=15, weight="bold"))
+        register_button.pack(side="left", padx=10)
+
+        back_to_menu = ctk.CTkButton(button_frame, text="Volver al menú", command=self.show_main_menu, font=ctk.CTkFont(size=15, weight="bold"))
+        back_to_menu.pack(side="left", padx=10)
 
     def show_teacher_registration(self):
         self.clear_root()
