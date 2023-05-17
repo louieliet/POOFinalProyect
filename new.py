@@ -1,7 +1,7 @@
-from tkinter import Tk, Label, Entry, Button
-from tkinter import messagebox
+
 from PIL import Image, ImageTk
 import csv
+import customtkinter as ctk
 
 class Estacionamiento:
     def __init__(self):
@@ -54,80 +54,72 @@ class Profesor(Estacionamiento):
 
 class ParkingApp:
     def __init__(self):
-        self.window = Tk()
-        self.window.title("Proyecto Programación Orientada a Objetos")
-        self.window.geometry("500x500")
-        self.window.resizable(False, False)
-        self.bg_image = Image.open("bg.jpg")
-        self.bg_photo = ImageTk.PhotoImage(self.bg_image)
+        self.root = ctk.CTk()
+        self.root.title("Proyecto Programación Orientada a Objetos")
+        self.root.geometry("720x1000")
+        self.root.resizable(False, False)
 
     def show_main_menu(self):
-        self.clear_window()
-        self.window.configure(bg="white")
-        bg_label = Label(self.window, image=self.bg_photo)
-        bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-        estacionamiento_label = Label(self.window, text="Bienvenido al Estacionamiento", font=("Arial", 16), bg="white")
+        self.clear_root()
+        self.root.configure(bg="white")
+        estacionamiento_label = ctk.CTkLabel(self.root, text="Bienvenido al Estacionamiento", font=ctk.CTkFont(size=30, weight="bold"))
         estacionamiento_label.pack(pady=20)
-        menu_label = Label(self.window, text="Menú de opciones", font=("Arial", 14), bg="white")
+        menu_label = ctk.CTkLabel(self.root, text="Menú de opciones", font=("Arial", 14))
         menu_label.pack(pady=20)
-        register_student_button = Button(self.window, text="Registrar Alumnos", command=self.show_student_registration, font=("Arial", 12), height=2, width=15)
+        register_student_button = ctk.CTkButton(self.root, text="Registrar Estudiante", font=ctk.CTkFont(size=30, weight="bold"), command=self.show_student_registration)
         register_student_button.pack()
-        register_teacher_button = Button(self.window, text="Registrar Docentes", command=self.show_teacher_registration, font=("Arial", 12), height=2, width=15)
+        register_teacher_button = ctk.CTkButton(self.root, text="Registrar Profesor", font=ctk.CTkFont(size=30, weight="bold"), command=self.show_teacher_registration)
         register_teacher_button.pack()
 
     def show_student_registration(self):
-        self.clear_window()
-        self.window.configure(bg="white")
-        bg_label = Label(self.window, image=self.bg_photo)
-        bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-        title_label = Label(self.window, text="Registrar Alumnos", font=("Arial", 16), bg="white")
+        self.clear_root()
+        title_label = ctk.CTkLabel(self.root, text="Registrar Alumnos", font=ctk.CTkFont(size=30, weight="bold"))
         title_label.pack(pady=20)
-        name_label = Label(self.window, text="Nombre:", font=("Arial", 12), bg="white")
+        name_label = ctk.CTkLabel(self.root, text="Nombre:", font=ctk.CTkFont(size=30, weight="bold"))
         name_label.pack()
-        self.name_entry = Entry(self.window, font=("Arial", 12))
+        self.name_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
         self.name_entry.pack()
-        id_label = Label(self.window, text="ID:", font=("Arial", 12), bg="white")
+        id_label = ctk.CTkLabel(self.root, text="ID:", font=ctk.CTkFont(size=30, weight="bold"))
         id_label.pack()
-        self.id_entry = Entry(self.window, font=("Arial", 12))
+        self.id_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
         self.id_entry.pack()
-        plates_label = Label(self.window, text="Placas:", font=("Arial", 12), bg="white")
+        plates_label = ctk.CTkLabel(self.root, text="Placas:", font=ctk.CTkFont(size=30, weight="bold"))
         plates_label.pack()
-        self.plates_entry = Entry(self.window, font=("Arial", 12))
+        self.plates_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
         self.plates_entry.pack()
-        carrera_label = Label(self.window, text="Carrera:", font=("Arial", 12), bg="white")
+        carrera_label = ctk.CTkLabel(self.root, text="Carrera:", font=ctk.CTkFont(size=30, weight="bold"))
         carrera_label.pack()
-        self.carrera_entry = Entry(self.window, font=("Arial", 12))
+        self.carrera_entry = ctk.CTkEntry(self.root, font=ctk.CTkFont(size=30, weight="bold"))
         self.carrera_entry.pack()
-        register_button = Button(self.window, text="Registrar", command=self.register_student, font=("Arial", 12), height=2, width=15)
+        register_button = ctk.CTkButton(self.root, text="Registrar", command=self.register_student, font=ctk.CTkFont(size=30, weight="bold"))
         register_button.pack()
-        back_to_menu = Button(text="Volver al menú", command=self.show_main_menu, font=("Arial", 12), height=2, width=15)
+        back_to_menu = ctk.CTkButton(self.root, text="Volver al menú", command=self.show_main_menu, font=ctk.CTkFont(size=30, weight="bold"))
         back_to_menu.pack()
 
-
     def show_teacher_registration(self):
-        self.clear_window()
-        self.window.configure(bg="white")
-        bg_label = Label(self.window, image=self.bg_photo)
+        self.clear_root()
+        self.root.configure(bg="white")
+        bg_label = Label(self.root, image=self.bg_photo)
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
-        title_label = Label(self.window, text="Registrar Docentes", font=("Arial", 16), bg="white")
+        title_label = Label(self.root, text="Registrar Docentes", font=("Arial", 16), bg="white")
         title_label.pack(pady=20)
-        name_label = Label(self.window, text="Nombre:", font=("Arial", 12), bg="white")
+        name_label = Label(self.root, text="Nombre:", font=("Arial", 12), bg="white")
         name_label.pack()
-        self.name_entry = Entry(self.window, font=("Arial", 12))
+        self.name_entry = Entry(self.root, font=("Arial", 12))
         self.name_entry.pack()
-        id_label = Label(self.window, text="ID:", font=("Arial", 12), bg="white")
+        id_label = Label(self.root, text="ID:", font=("Arial", 12), bg="white")
         id_label.pack()
-        self.id_entry = Entry(self.window, font=("Arial", 12))
+        self.id_entry = Entry(self.root, font=("Arial", 12))
         self.id_entry.pack()
-        plates_label = Label(self.window, text="Placas:", font=("Arial", 12), bg="white")
+        plates_label = Label(self.root, text="Placas:", font=("Arial", 12), bg="white")
         plates_label.pack()
-        self.plates_entry = Entry(self.window, font=("Arial", 12))
+        self.plates_entry = Entry(self.root, font=("Arial", 12))
         self.plates_entry.pack()
-        area_label = Label(self.window, text="Área:", font=("Arial", 12), bg="white")
+        area_label = Label(self.root, text="Área:", font=("Arial", 12), bg="white")
         area_label.pack()
-        self.area_entry = Entry(self.window, font=("Arial", 12))
+        self.area_entry = Entry(self.root, font=("Arial", 12))
         self.area_entry.pack()
-        register_button = Button(self.window, text="Registrar", command=self.register_teacher, font=("Arial", 12), height=2, width=15)
+        register_button = Button(self.root, text="Registrar", command=self.register_teacher, font=("Arial", 12), height=2, width=15)
         register_button.pack()
         back_to_menu = Button(text="Volver al menú", command=self.show_main_menu, font=("Arial", 12), height=2, width=15)
         back_to_menu.pack()
@@ -163,14 +155,13 @@ class ParkingApp:
         else:
             messagebox.showerror("Error de Registro", "Por favor, complete todos los campos.")
 
-    def clear_window(self):
-        for widget in self.window.winfo_children():
+    def clear_root(self):
+        for widget in self.root.winfo_children():
             widget.destroy()
 
     def run(self):
         self.show_main_menu()
-        self.window.mainloop()
-
+        self.root.mainloop()
 
 app = ParkingApp()
-app.run()
+app.run() 
